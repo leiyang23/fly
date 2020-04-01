@@ -1,0 +1,26 @@
+/* pages/index.wxss */
+page{
+  height: 100%;
+}
+.con{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 50rpx 50rpx 0 50rpx;
+  background-color: #f1f0ed
+}
+.card{
+  width: 300rpx;
+  height: 200rpx;
+  background-color: #45b787;
+  color: #f8f4ed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: ease-in-out .5 all
+}
+.card:active{
+  background-color: #c0c4c3
+}

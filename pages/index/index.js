@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+var setting = require("../../utils/setting.js")
 
 Page({
   data: {
@@ -14,10 +15,11 @@ Page({
     this.audioCtx.onEnded(this.next)
   },
 
-  onLoad: function () {
+  onLoad: function (params) {
     let that = this;
+    let tag = params.tag
     wx.request({
-      url: 'https://assert.freaks.group/api/assert?category=audio&tag=zhoujielun',
+      url: setting.basePath + '/assert?category=audio&tag=' + tag,
       success(res){
         console.log(res)
         let basePath = res.data.urlBasePath;
@@ -31,6 +33,17 @@ Page({
         }
         that.setData({
           songs:songs
+        });
+
+
+        let trans = "";
+        if (setting.trans.hasOwnProperty(tag)) {
+          trans = setting.trans[tag]
+        } else {
+          trans = tag
+        }
+        wx.setNavigationBarTitle({
+          title: trans
         })
         
       }
@@ -55,5 +68,12 @@ Page({
     this.audioCtx.title = this.data.songs[this.data.songIndex].name;
     this.audioCtx.src = this.data.songs[this.data.songIndex].url;
     this.audioCtx.play();
+  },
+
+   /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   }
 })
