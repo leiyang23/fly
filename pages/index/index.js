@@ -4,51 +4,56 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    songs:[],
+    songIndex:-1,
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+  onReady(e) {
+    // 使用 wx.createAudioContext 获取 audio 上下文 context
+    this.audioCtx = wx.getBackgroundAudioManager();
+    
+    this.audioCtx.onEnded(this.next)
   },
+
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
+    let that = this;
+    wx.request({
+      url: 'https://assert.freaks.group/api/assert?category=audio&tag=zhoujielun',
+      success(res){
+        console.log(res)
+        let basePath = res.data.urlBasePath;
+        let data = res.data.data;
+        let songs = []
+        for (let i=0;i<data.length;i++){
+          songs.push({
+            "name":data[i].replace(".mp3",""),
+            "url": basePath + 　"/" + data[i]
           })
         }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+        that.setData({
+          songs:songs
+        })
+        
+      }
     })
+
+  },
+
+  play:function(e){
+    console.log(e)
+
+    this.audioCtx.title = e.currentTarget.dataset['title']
+    this.audioCtx.src = e.currentTarget.dataset['url'];
+    this.audioCtx.play();
+    this.data.songIndex = e.currentTarget.dataset['index'];
+  },
+  next:function(){
+    if (this.data.songIndex < this.data.songs.length) {
+      this.data.songIndex = this.data.songIndex + 1
+    }else{
+      this.data.songIndex = 0
+    }
+    this.audioCtx.title = this.data.songs[this.data.songIndex].name;
+    this.audioCtx.src = this.data.songs[this.data.songIndex].url;
+    this.audioCtx.play();
   }
 })
