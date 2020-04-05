@@ -1,15 +1,19 @@
 /* pages/index.wxss */
-page{
+
+page {
   height: 100%;
-  background-color: #f1f0ed
+  background-color: #f1f0ed;
 }
-.con{
+
+.con {
   padding: 0 50rpx 0 50rpx;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;  
+  justify-content: space-between;
 }
-.card{
+
+.card {
+  position: relative;
   width: 300rpx;
   height: 200rpx;
   margin-top: 50rpx;
@@ -19,8 +23,36 @@ page{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: ease-in-out .5 all
 }
-.card:active{
-  background-color: #c0c4c3
+
+.card span {
+  position: absolute;
+  width: 300rpx;
+  height: 200rpx;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.card span:active{
+animation: living .4s ease-in-out 1;
+background-color: #1a6840;
+}
+
+@keyframes living {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0; /*圆形放大的同时，透明度逐渐减小为0*/
+  }
+
+
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
 }

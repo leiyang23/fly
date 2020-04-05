@@ -1,5 +1,5 @@
 <!--pages/index.wxml-->
 
 <view class="con">
-<view class="card" wx:for="{{audio}}" bindtap="goto" data-tag="{{item.srcTag}}">{{item.trans}}</view>
+<view class="card" wx:for="{{audio}}" bindtap="goto" data-tag="{{item.srcTag}}"><span></span>{{item.trans}}</view>
 </view>
