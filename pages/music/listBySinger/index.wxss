@@ -1,0 +1,30 @@
+/**index.wxss**/
+page{
+  padding: 0;
+  margin: 0;
+  background-color: #5dbe8a;
+}
+.btn{
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 40px;
+  color: #4c1f24;
+  transition: ease-in-out all .5
+
+}
+.btn:nth-of-type(odd){
+  background-color: #45b787
+}
+.btn:active{
+  background-color: #c0c4c3
+}
+
+.ctl{
+  position: fixed;
+  z-index: 99;
+  bottom: 10px;
+  right: 10px
+}

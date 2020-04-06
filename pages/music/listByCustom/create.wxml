@@ -1,0 +1,5 @@
+<view>
+<label>名称</label><input placeholder="起个名吧" bindinput="nameInput"></input>
+<label>描述</label><input placeholder="介绍一下" bindinput="descInput"></input>
+<button bindtap="submit">提交</button>
+</view>

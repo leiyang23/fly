@@ -1,17 +1,17 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    let that = this;
+    // 设置登录状态
+    wx.getStorage({
+      key: 'sessionId',
+      success:res => {
+        if (res.data.length == 32) {
+          that.globalData.isLogin = true;
+        }
       }
-    })
+    }),
+
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -29,11 +29,16 @@ App({
               }
             }
           })
+        }else{
+          wx.navigateTo({
+            url: '/pages/auth/auth?type=getUserInfo',
+          })
         }
       }
-    })
-  },
+    })    
+  },  
   globalData: {
-    userInfo: null
+    userInfo: null,
+    isLogin:false
   }
 })

@@ -1,0 +1,17 @@
+/* pages/user/user.wxss */
+.user{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.avatar{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px 40px;
+  overflow: hidden;
+}
+.nickname{
+  color: #333;
+  font-size: 12px;
+  margin-top: 10px;
+}

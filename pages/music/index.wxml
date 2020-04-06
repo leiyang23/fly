@@ -1,0 +1,17 @@
+<!--pages/index.wxml-->
+
+<view class="con">
+  <view wx:if="{{!isLogin}}">
+    <button bindtap="login">登录</button>
+  </view>
+
+  <view class="card" wx:for="{{playList}}"style="background-color:#e16c96" bindtap="goto" wx:key="index" data-playlistId="{{item.id}}">
+    <span></span>{{item.name}}
+  </view>
+  <view class="card" style="background-color:#e16c96" bindtap="createList"><span></span>创建歌单 </view>
+
+
+  <view class="card" wx:for="{{audio}}" bindtap="goto" wx:key="index" data-tag="{{item.srcTag}}">
+    <span></span>{{item.trans}}
+  </view>
+</view>
