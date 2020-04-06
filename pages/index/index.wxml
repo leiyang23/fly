@@ -1,7 +1,0 @@
-<!--index.wxml-->
-<view class="btn" type="default" wx:for="{{songs}}" bindtap="play" 
-data-url="{{item.url}}" data-index="{{index}}" data-title="{{item.name}}">{{item.name}}</view>
-
-<cover-view class="ctl">
-<cover-image src="/assert/下一曲.png" bindtap="next" style="width: 30px;height:30px"></cover-image>
-</cover-view>
