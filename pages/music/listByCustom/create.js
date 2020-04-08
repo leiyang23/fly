@@ -22,16 +22,40 @@ Page({
   },
   submit(){
     let that = this;
+    let sessionId = ""
+    try {
+      var value = wx.getStorageSync('sessionId')
+      if (value) {
+        sessionId = value
+      }
+    } catch (e) {
+      wx.showToast({
+        title: '请登录',
+        icon:"none"
+      })
+      return
+    }
+    console.log(sessionId)
+
     wx.request({
       url: setting.basePath + '/miniprogram/playlist/create',
       method:"POST",
+      header: { "Content-Type":"application/x-www-form-urlencoded"},
       data:{
         name:that.data.name,
-        desc:that.data.desc
+        desc:that.data.desc,
+        sessionId: sessionId
       },
       success(res){
         console.log(res.data)
-        console.log("创建成功")
+        if(res.data.code == 200){
+          wx.showToast({
+            title: '创建成功',
+          })
+          wx.navigateBack({
+            delta:1
+          })
+        }
       }
     })
   },

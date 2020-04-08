@@ -7,6 +7,14 @@ Page({
   data: {
     songs:[],
     songIndex:-1,
+
+    myPlaylistIds:[],
+    showModal:false,
+    addSongInfo:{
+      songName:"",
+      songUrl:"",
+      playlistId:""
+    },
   },
   onReady(e) {
     // 使用 wx.createAudioContext 获取 audio 上下文 context
@@ -50,6 +58,83 @@ Page({
     })
 
   },
+  addPlaylistModal(e){
+    let songName = e.currentTarget.dataset['title'];
+    let songUrl = e.currentTarget.dataset['url'];
+    let myPlaylistIds = [];
+
+    try {
+      var myPlaylist = wx.getStorageSync('myPlaylist')
+      if (myPlaylist) {
+        for (let i in myPlaylist){
+          myPlaylistIds.push(i)
+        };
+        this.setData({
+          showModal: true,
+          myPlaylistIds: myPlaylistIds,
+          addSongInfo:{"songName":songName,"songUrl":songUrl}
+        })
+        
+      }
+    } catch (e) {
+      // Do something when catch error
+      wx.showToast({
+        title: '请登录',
+        icon:"none"
+      })
+    }
+
+  },
+  addSong(e){
+    let that = this;
+    that.setData({
+      showModal:false
+    })
+    let playlistId = e.currentTarget.dataset['id'];
+
+    try {
+      var sessionId = wx.getStorageSync('sessionId')
+      if (sessionId) {}
+    } catch (e) {
+      // Do something when catch error
+      wx.showToast({
+        title: '请登录',
+        icon: "none"
+      })
+      return
+    }
+
+    wx.request({
+      url: setting.basePath + '/miniprogram/playlist/addSong',
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data:{
+        sessionId: sessionId,
+        playlistId: playlistId,
+        songName:that.data.addSongInfo.songName,
+        songUrl: that.data.addSongInfo.songUrl
+      },
+      success(res){
+        if (res.data.code == 200){
+          wx.showToast({
+            title: '添加成功',
+          });
+        }else{
+          wx.showToast({
+            title: '添加失败',
+            icon:"none"
+          });
+        }
+      },
+      fail(err){
+        console.error(err)
+      }
+      
+    })
+  },
+
 
   play:function(e){
     console.log(e)
