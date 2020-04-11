@@ -11,20 +11,62 @@ Page({
   data: {
     audio: {},
     playlists: [],
-    isLogin: false
   },
 
-  login: function() {
-    let that = this;
-    common.login(function() {
-      that.setData({
-        isLogin: app.globalData.isLogin
-      })
-    });
-  },
+  // 进入 创建歌单页面
   createList() {
     wx.navigateTo({
       url: '/pages/music/listByCustom/create',
+    })
+  },
+
+// 删除歌单
+  showModal(e){    
+    let that = this;
+    let playlistId = e.currentTarget.dataset['id'];
+    wx.showModal({
+      title: '提示',
+      content: '确认删除歌单？',
+      success(res){
+        if(res.confirm){
+          that.delPlaylist(playlistId)
+        }
+      }
+    })
+
+  },
+  delPlaylist(playlistId){
+    let that = this;
+    let sessionId = ""
+    try {
+      var value = wx.getStorageSync('sessionId')
+      if (value) {
+        sessionId = value
+      }
+    } catch (e) {
+      wx.showToast({
+        title: '请登录',
+        icon: "none"
+      })
+      return
+    }    
+    
+    wx.request({
+      url: setting.basePath + '/miniprogram/playlist/delete',
+      method: "POST",
+      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      data:{
+        sessionId: sessionId,
+        playlistId: playlistId
+      },
+      success(res){
+        if (res.data.code == 200){
+          wx.showToast({
+            title: '删除歌单',
+          })
+          that.getPlaylists()
+        }
+      }
     })
   },
 
@@ -34,8 +76,7 @@ Page({
   onLoad: function(options) {
 
     this.getSingers()
-    this.getPlaylists()
-
+    this.getPlaylists();
   },
 
   getSingers() {
@@ -111,7 +152,7 @@ Page({
                 key: "myPlaylist",
                 data: myPlaylist
               })
-            }
+            };           
             
           }
         })
@@ -120,8 +161,7 @@ Page({
         wx.showToast({
             title: '请登录',
             icon: "none"
-          }),
-          that.login()
+          })
       }
     })
   },
@@ -151,14 +191,7 @@ Page({
    */
   onShow: function() {
     let that = this;
-    that.setData({
-      isLogin: app.globalData.isLogin,
-    });
-    console.log()
-    if (getCurrentPages()[0].__displayReporter.showReferpagepath == "pages/music/listByCustom/create.html") {
-
-    }
-
+    that.getPlaylists()
   },
 
   /**
@@ -180,6 +213,9 @@ Page({
    */
   onPullDownRefresh: function() {
     this.getPlaylists();
+    setTimeout(function(){
+      wx.stopPullDownRefresh()
+    },500)
   },
 
   /**

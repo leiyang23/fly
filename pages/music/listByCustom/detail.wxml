@@ -1,7 +1,7 @@
 <!--pages/music/listByCustom/detail.wxml-->
 
 
-<view class="btn" type="default" wx:for="{{songs}}" bindtap="play" data-url="{{item.url}}" data-index="{{index}}" data-title="{{item.name}}">
+<view class="btn" type="default" wx:for="{{songs}}" bindtap="play" bindlongpress="showModal" data-url="{{item.url}}" data-index="{{index}}" data-title="{{item.name}}">
   {{item.name}}
 </view>
 

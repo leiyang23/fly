@@ -10,15 +10,6 @@ Page({
    */
   data: {
     userInfo: null,
-    isLogin: false
-  },
-  login: function () {
-    let that = this;
-    common.login(function () {
-      that.setData({
-        isLogin: app.globalData.isLogin
-      })
-    });
   },
 
   /**
@@ -44,7 +35,6 @@ Page({
     console.log(app.globalData)
     this.setData({
       userInfo: app.globalData.userInfo,
-      isLogin: app.globalData.isLogin
     });
   },
 

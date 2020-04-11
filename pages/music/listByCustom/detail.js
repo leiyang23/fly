@@ -1,4 +1,5 @@
 // pages/music/listByCustom/detail.js
+var setting = require("../../../utils/setting.js")
 Page({
 
   /**
@@ -34,6 +35,74 @@ Page({
       }
     })
   },
+  showModal(e){
+    let that = this;
+    let songName = e.currentTarget.dataset['title'];
+    let index = e.currentTarget.dataset['index']
+
+    wx.showModal({
+      title: '提示',
+      content: '确认从歌单中删除？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          that.delSong(songName, index)
+
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  delSong(songName, index){
+    let that = this;
+
+    let playlistId = this.data.name;    
+
+    try {
+      var sessionId = wx.getStorageSync('sessionId')
+      if (sessionId) { }
+    } catch (e) {
+      // Do something when catch error
+      wx.showToast({
+        title: '请登录',
+        icon: "none"
+      })
+      return
+    };
+
+    wx.request({
+      url: setting.basePath + '/miniprogram/playlist/delSong',
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        sessionId: sessionId,
+        playlistId: playlistId,
+        songName: songName,
+      },
+      success(res){
+        if(res.data.code == 200){
+          wx.showToast({
+            title: '已删除',
+          });
+
+          that.data.songs.splice(index, 1)
+          that.setData({
+            songs: that.data.songs
+          })
+        }
+      },
+      fail(err){
+        console.error(err);
+        wx.showToast({
+          title: '网络错误',
+          icon:"none"
+        })
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -53,7 +122,7 @@ Page({
     this.data.songIndex = e.currentTarget.dataset['index'];
   },
   next: function () {
-    if (this.data.songIndex < this.data.songs.length) {
+    if (this.data.songIndex < this.data.songs.length-1) {
       this.data.songIndex = this.data.songIndex + 1
     } else {
       this.data.songIndex = 0

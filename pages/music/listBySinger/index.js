@@ -58,7 +58,9 @@ Page({
     })
 
   },
-  addPlaylistModal(e){
+
+  // 显示 选择歌单 弹框
+  addPlaylistModal(e){    
     let songName = e.currentTarget.dataset['title'];
     let songUrl = e.currentTarget.dataset['url'];
     let myPlaylistIds = [];
@@ -85,12 +87,37 @@ Page({
     }
 
   },
-  addSong(e){
+  closeModal(){
+    this.setData({
+      showModal:false
+    })
+  },
+
+  // 显示 确认添加 弹框
+  showSubmitModal(e){
+    let that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确认添加到此歌单？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          let playlistId = e.currentTarget.dataset['id'];
+          that.addSong(playlistId)
+
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        };
+        that.showModal = false
+      }
+      
+    })
+  },
+  addSong(playlistId){
     let that = this;
     that.setData({
       showModal:false
     })
-    let playlistId = e.currentTarget.dataset['id'];
 
     try {
       var sessionId = wx.getStorageSync('sessionId')
@@ -145,7 +172,7 @@ Page({
     this.data.songIndex = e.currentTarget.dataset['index'];
   },
   next:function(){
-    if (this.data.songIndex < this.data.songs.length) {
+    if (this.data.songIndex < this.data.songs.length - 1) {
       this.data.songIndex = this.data.songIndex + 1
     }else{
       this.data.songIndex = 0

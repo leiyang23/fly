@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="btn" type="default" wx:for="{{songs}}" bindtap="play" bindlongtap="addPlaylistModal" data-url="{{item.url}}" data-index="{{index}}" data-title="{{item.name}}">
+<view class="btn" type="default" wx:for="{{songs}}" bindtap="play" bindlongpress="addPlaylistModal" data-url="{{item.url}}" data-index="{{index}}" data-title="{{item.name}}">
   {{item.name}}
 </view>
 
@@ -7,6 +7,8 @@
   <cover-image src="/assert/下一曲.png" bindtap="next" style="width: 30px;height:30px"></cover-image>
 </cover-view>
 
-<cover-view class="selectPlaylist" wx:if="{{showModal}}">
-  <cover-view class="item" bindtap="addSong" wx:for="{{myPlaylistIds}}" wx:key="index" data-id="{{item}}">{{item}}</cover-view>
+
+
+<cover-view class="picker" wx:if="{{showModal}}" bindtap="closeModal">
+<cover-view class="item" wx:for="{{myPlaylistIds}}" wx:key="{{index}}" bindtap="showSubmitModal" data-id="{{item}}">{{item}}</cover-view>
 </cover-view>

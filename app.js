@@ -1,16 +1,14 @@
 //app.js
+var common = require("./utils/common.js")
 App({
+  globalData: {
+    userInfo: null,
+    isLogin: false
+  },
   onLaunch: function () {
     let that = this;
-    // 设置登录状态
-    wx.getStorage({
-      key: 'sessionId',
-      success:res => {
-        if (res.data.length == 32) {
-          that.globalData.isLogin = true;
-        }
-      }
-    }),
+    // 登录
+    common.login()
 
     // 获取用户信息
     wx.getSetting({
@@ -36,9 +34,5 @@ App({
         }
       }
     })    
-  },  
-  globalData: {
-    userInfo: null,
-    isLogin:false
-  }
+  }, 
 })

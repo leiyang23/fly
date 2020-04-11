@@ -1,7 +1,7 @@
 var app = getApp()
 var setting = require("./setting.js")
 
-var login=function(callback){
+var login=function(){
   wx.login({
     success(res) {
       if (res.code) {
@@ -12,8 +12,6 @@ var login=function(callback){
             code: res.code
           },
           success(res) {
-            console.log("已登录")
-            console.log(res.data)
             if (res.data.code == 200) {
               wx.setStorage({
                 key: "sessionId",
@@ -23,8 +21,6 @@ var login=function(callback){
                 title: '登录成功',
                 duration: 2000
               });
-              app.globalData.isLogin = true;
-              callback()
             }
           }
         })

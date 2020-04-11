@@ -8,14 +8,4 @@
   </view>
 
 
-
-  <block wx:if="{{isLogin}}">
-  <view>我的歌单</view>  
-  </block>
-  <block wx:else>
-    <button bindtap="login">登录</button>
-  </block>
-
-
-
 </view>

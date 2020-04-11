@@ -1,1 +1,11 @@
 /* pages/auth/auth.wxss */
+page{
+  height: 100%
+}
+.con{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

@@ -1,2 +1,4 @@
 <!--pages/auth/auth.wxml-->
- <button open-type="{{scopeType}}" bindgetuserinfo="onGotUserInfo">获取权限</button>
+<view class="con">
+ <button open-type="{{scopeType}}" bindgetuserinfo="onGotUserInfo">授予权限</button>
+</view>
