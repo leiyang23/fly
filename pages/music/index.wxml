@@ -5,7 +5,7 @@
   <view class="card" wx:for="{{playlists}}"style="background-color:#e16c96" bindtap="gotoPlaylist" bindlongpress="showModal" wx:key="index" data-id="{{item.id}}">
     <span></span>{{item.name}}
   </view>
-  <view class="card" style="background-color:#e16c96" bindtap="createList"><span></span>创建歌单 </view>
+  <view class="card" style="background-color:#e16c96" bindtap="createList"><span></span>创建标签</view>
 
 
   <view class="card" wx:for="{{audio}}" bindtap="goto" wx:key="index" data-tag="{{item.srcTag}}">

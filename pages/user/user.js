@@ -11,6 +11,10 @@ Page({
   data: {
     userInfo: null,
   },
+  login(){
+    // 登录
+    common.login()
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -31,11 +35,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 设置用户信息
-    console.log(app.globalData)
-    this.setData({
-      userInfo: app.globalData.userInfo,
-    });
   },
 
   /**

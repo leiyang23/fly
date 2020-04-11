@@ -15,9 +15,25 @@ Page({
 
   // 进入 创建歌单页面
   createList() {
-    wx.navigateTo({
-      url: '/pages/music/listByCustom/create',
-    })
+    try {
+      var value = wx.getStorageSync('sessionId')
+      if (value) {
+        wx.navigateTo({
+          url: '/pages/music/listByCustom/create',
+        })
+      }else{
+        wx.showToast({
+          title: '登陆后可自定义标签',
+          icon:'none'
+        })
+      }
+    } catch (e) {
+      wx.showToast({
+        title: '登陆后可自定义标签',
+        icon:"none"
+      })
+    }
+    
   },
 
 // 删除歌单
@@ -45,7 +61,7 @@ Page({
       }
     } catch (e) {
       wx.showToast({
-        title: '请登录',
+        title: '未登录',
         icon: "none"
       })
       return
@@ -159,7 +175,7 @@ Page({
       },
       fail() {
         wx.showToast({
-            title: '请登录',
+            title: '登录后可自定义标签',
             icon: "none"
           })
       }

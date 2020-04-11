@@ -1,11 +1,13 @@
 <view class="user">
-  <view class="avatar">
+  <view class="avatar" bindtap="login">
     <open-data type="userAvatarUrl"></open-data>
   </view>
   <view class="nickname">
     Hello,
     <open-data type="userNickName"></open-data>
   </view>
+
+
 <view class="info">
 本程序系个人学习使用，音乐资源临时测试使用，如果侵犯到您的版权，请联系 leiyang_ace@163.com，我将在第一时间进行删除。
 </view>

@@ -1,11 +1,11 @@
 <view class="con">
   <view class="name">
     <label>名称：</label>
-    <input placeholder="给歌单起个名吧" maxlength="20" bindinput="nameInput"></input>
+    <input placeholder="给标签起个名吧" maxlength="20" bindinput="nameInput"></input>
   </view>
   <view class="desc">
     <label>描述：</label>
-    <textarea placeholder="介绍一下歌单的用途吧" bindinput="descInput"></textarea>
+    <textarea placeholder="介绍一下标签的用途吧" bindinput="descInput"></textarea>
   </view>
   <button bindtap="submit">提交</button>
 </view>

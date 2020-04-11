@@ -7,8 +7,8 @@ App({
   },
   onLaunch: function () {
     let that = this;
-    // 登录
-    common.login()
+    // // 登录
+    // common.login()
 
     // 获取用户信息
     wx.getSetting({
@@ -27,11 +27,12 @@ App({
               }
             }
           })
-        }else{
-          wx.navigateTo({
-            url: '/pages/auth/auth?type=getUserInfo',
-          })
         }
+        // else{
+        //   wx.navigateTo({
+        //     url: '/pages/auth/auth?type=getUserInfo',
+        //   })
+        // }
       }
     })    
   }, 
