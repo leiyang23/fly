@@ -1,9 +1,17 @@
 <!--pages/music/listByCustom/detail.wxml-->
 
-
+<block wx:if="{{songs.length>0}}">
 <view class="btn" type="default" wx:for="{{songs}}" bindtap="play" bindlongpress="showModal" data-url="{{item.url}}" data-index="{{index}}" data-title="{{item.name}}">
   {{item.name}}
 </view>
+</block>
+<block wx:else>
+
+<view class="nosongs">
+目前歌单中还未添加歌曲哦
+</view>
+</block>
+
 
 <cover-view class="ctl">
   <cover-image src="/assert/下一曲.png" bindtap="next" style="width: 30px;height:30px"></cover-image>

@@ -15,3 +15,12 @@
   font-size: 12px;
   margin-top: 10px;
 }
+
+.info{
+  width: 700rpx;
+  margin-left: 25rpx;
+  margin-top: 200rpx;
+  font-size: 12px;
+  line-height: 30px;
+  color: rgba(30, 30, 30, .5)
+}
