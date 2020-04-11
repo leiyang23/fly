@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "enablePullDownRefresh":true,
-  "backgroundColor":"#1ba784"
+  "backgroundColor":"#45b787",
+  "navigationBarTitleText": "音乐"
 }
