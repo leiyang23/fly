@@ -1,4 +1,5 @@
 // pages/music/listByCustom/detail.js
+const app = getApp()
 var setting = require("../../../utils/setting.js")
 Page({
 
@@ -22,42 +23,35 @@ Page({
   },
   submit(){
     let that = this;
-    let sessionId = ""
-    try {
-      var value = wx.getStorageSync('sessionId')
-      if (value) {
-        sessionId = value
-      }
-    } catch (e) {
+    if (app.globalData.sessionId) {
+      let sessionId = app.globalData.sessionId;
+      wx.request({
+        url: setting.basePath + '/miniprogram/playlist/create',
+        method: "POST",
+        header: { "Content-Type": "application/x-www-form-urlencoded" },
+        data: {
+          name: that.data.name,
+          desc: that.data.desc,
+          sessionId: sessionId
+        },
+        success(res) {
+          console.log(res.data)
+          if (res.data.code == 200) {
+            wx.showToast({
+              title: '创建成功',
+            })
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }
+      })
+    }else{
       wx.showToast({
-        title: '请登录',
+        title: '请登录后重试',
         icon:"none"
       })
-      return
     }
-    console.log(sessionId)
-
-    wx.request({
-      url: setting.basePath + '/miniprogram/playlist/create',
-      method:"POST",
-      header: { "Content-Type":"application/x-www-form-urlencoded"},
-      data:{
-        name:that.data.name,
-        desc:that.data.desc,
-        sessionId: sessionId
-      },
-      success(res){
-        console.log(res.data)
-        if(res.data.code == 200){
-          wx.showToast({
-            title: '创建成功',
-          })
-          wx.navigateBack({
-            delta:1
-          })
-        }
-      }
-    })
   },
 
   /**

@@ -4,6 +4,34 @@ page {
   height: 100%;
 }
 
+.not-init {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-init .text {
+  width: 80%;
+  font-size: 14px;
+  letter-spacing: .05em;
+  animation: change 8s ease-in-out infinite;
+}
+
+@keyframes change {
+  0%{
+    color: #fff
+  }
+  50% {
+    color: #000
+  }
+  100%{
+    color: #fff
+  }
+  
+}
+
 .con {
   padding: 0 50rpx 0 50rpx;
   display: flex;
@@ -32,9 +60,10 @@ page {
   bottom: 0;
   z-index: 1;
 }
-.card span:active{
-animation: living .4s ease-in-out 1;
-background-color: #1a6840;
+
+.card span:active {
+  animation: living 0.4s ease-in-out 1;
+  background-color: #1a6840;
 }
 
 @keyframes living {
@@ -43,12 +72,10 @@ background-color: #1a6840;
     opacity: 0.5;
   }
 
-
   50% {
     transform: scale(1.5);
     opacity: 0; /*圆形放大的同时，透明度逐渐减小为0*/
   }
-
 
   100% {
     transform: scale(1);

@@ -1,5 +1,5 @@
 <!--pages/index.wxml-->
-
+<block wx:if="{{init}}">
 <view class="con">
 
   <view class="card" wx:for="{{playlists}}"style="background-color:#e16c96" bindtap="gotoPlaylist" bindlongpress="showModal" wx:key="index" data-id="{{item.id}}">
@@ -12,3 +12,11 @@
     <span></span>{{item.trans}}
   </view>
 </view>
+</block>
+
+<block wx:else>
+<view class="not-init" bindtap="unlock">
+<view class="text">{{text}}</view>
+</view>
+</block>
+

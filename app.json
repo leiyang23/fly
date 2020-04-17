@@ -4,8 +4,9 @@
     "pages/auth/auth",
     "pages/user/user",
     "pages/music/listByCustom/create",
-    "pages/music/listByCustom/detail",    
-    "pages/music/listBySinger/index"
+    "pages/music/listByCustom/detail",
+    "pages/music/listBySinger/index",
+    "pages/poetry/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -20,6 +21,12 @@
         "text": "音乐",
         "iconPath": "/assert/music.png",
         "selectedIconPath": "/assert/music-selected.png"
+      },
+      {
+        "pagePath": "pages/poetry/index",
+        "text": "诗词",
+        "iconPath": "/assert/poetry.png",
+        "selectedIconPath": "/assert/poetry-selected.png"
       },
       {
         "pagePath": "pages/user/user",

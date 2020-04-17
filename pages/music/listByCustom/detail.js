@@ -1,4 +1,5 @@
 // pages/music/listByCustom/detail.js
+var app = getApp()
 var setting = require("../../../utils/setting.js")
 Page({
 
@@ -59,49 +60,49 @@ Page({
 
     let playlistId = this.data.name;    
 
-    try {
-      var sessionId = wx.getStorageSync('sessionId')
-      if (sessionId) { }
-    } catch (e) {
-      // Do something when catch error
+    if (app.globalData.sessionId){
+      let sessionId = app.globalData.sessionId;
+      wx.request({
+        url: setting.basePath + '/miniprogram/playlist/delSong',
+        method: "POST",
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        data: {
+          sessionId: sessionId,
+          playlistId: playlistId,
+          songName: songName,
+        },
+        success(res) {
+          if (res.data.code == 200) {
+            wx.showToast({
+              title: '已删除',
+            });
+
+            that.data.songs.splice(index, 1)
+            that.setData({
+              songs: that.data.songs
+            })
+          }
+        },
+        fail(err) {
+          console.error(err);
+          wx.showToast({
+            title: '网络错误',
+            icon: "none"
+          })
+        }
+      })
+    }else{
       wx.showToast({
-        title: '请登录',
+        title: '未登录',
         icon: "none"
       })
       return
-    };
+    }
 
-    wx.request({
-      url: setting.basePath + '/miniprogram/playlist/delSong',
-      method: "POST",
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        sessionId: sessionId,
-        playlistId: playlistId,
-        songName: songName,
-      },
-      success(res){
-        if(res.data.code == 200){
-          wx.showToast({
-            title: '已删除',
-          });
 
-          that.data.songs.splice(index, 1)
-          that.setData({
-            songs: that.data.songs
-          })
-        }
-      },
-      fail(err){
-        console.error(err);
-        wx.showToast({
-          title: '网络错误',
-          icon:"none"
-        })
-      }
-    })
+    
   },
 
   /**

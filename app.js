@@ -3,12 +3,18 @@ var common = require("./utils/common.js")
 App({
   globalData: {
     userInfo: null,
-    isLogin: false
+    sessionId:null,
   },
   onLaunch: function () {
     let that = this;
-    // // 登录
-    // common.login()
+    try {
+      var value = wx.getStorageSync('sessionId')
+      if (value) {
+        that.globalData.sessionId = value;
+      }
+    } catch (e) {
+      console.error(e)
+    }
 
     // 获取用户信息
     wx.getSetting({

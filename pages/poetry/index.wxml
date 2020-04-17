@@ -1,0 +1,14 @@
+<!--pages/poetry/index.wxml-->
+<view class="con">
+  <view class="title">{{poetry.title}}</view>
+
+  <view class="author">{{poetry.author}}</view>
+
+  <view class="body">
+    <view class="item" wx:for="{{poetry.paragraphs}}" wx:key="index">{{item}}</view>
+  </view>
+
+  <view class="notes">
+    <view class="item" wx:for="{{poetry.notes}}" wx:key="index">{{item}}</view>
+  </view>
+</view>

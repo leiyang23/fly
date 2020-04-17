@@ -1,0 +1,43 @@
+/* pages/poetry/index.wxss */
+
+page {
+  height: 100%;
+}
+
+.con {
+  height: 100%;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: 50rpx;
+  margin-right: 50rpx;
+}
+
+.title {
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.author {
+  color: #666;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.body {
+  margin-bottom: 30px;
+  color: #36282b
+}
+
+.body .item {
+  line-height: 30px;
+}
+
+.notes {
+  text-align: left;
+  font-size: 12px;
+  color: #666;
+}
+.notes .item{
+  line-height: 20px;
+}

@@ -1,4 +1,3 @@
-var app = getApp()
 var setting = require("./setting.js")
 
 var login=function(){
@@ -13,6 +12,7 @@ var login=function(){
           },
           success(res) {
             if (res.data.code == 200) {
+              getApp().globalData.sessionId = res.data.sessionId;
               wx.setStorage({
                 key: "sessionId",
                 data: res.data.sessionId

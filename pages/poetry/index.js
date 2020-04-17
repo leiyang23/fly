@@ -1,36 +1,24 @@
-// pages/user/user.js
-const app = getApp()
-var setting = require("../../utils/setting.js")
-var common = require("../../utils/common.js")
-
+// pages/poetry/index.js
+var ci = require("../../utils/ci.js")
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: null,
+    poetry:{}
   },
-  login(){
-    let that = this;
-    if (app.globalData.sessionId) {
-      wx.showToast({
-        title: '已登录',
-      })
-    }else{
-      // 登录
-      common.login()
-    }
-    
-    
+  random(){
+    this.setData({
+      poetry: ci.ci[Math.floor(Math.random() * ci.ci.length)]
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
+    this.random()
   },
 
   /**
@@ -44,6 +32,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
   },
 
   /**
@@ -64,7 +53,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.random();
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+    }, 200)
   },
 
   /**
