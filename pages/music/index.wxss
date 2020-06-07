@@ -16,7 +16,7 @@ page {
   width: 80%;
   font-size: 14px;
   letter-spacing: .05em;
-  animation: change 8s ease-in-out infinite;
+  animation: change 12s ease-in-out infinite;
 }
 
 @keyframes change {

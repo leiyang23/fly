@@ -6,7 +6,8 @@
     "pages/music/listByCustom/create",
     "pages/music/listByCustom/detail",
     "pages/music/listBySinger/index",
-    "pages/poetry/index"
+    "pages/poetry/index",
+    "pages/music/netease/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -70,6 +70,13 @@ Page({
     })
   },
 
+  // 进入网易歌单页面
+  gotoNetease() {
+    wx.navigateTo({
+      url: '/pages/music/netease/index',
+    })
+  },
+
   // 删除歌单
   showModal(e) {
     let that = this;
@@ -126,11 +133,11 @@ Page({
     that.setData({
       text: that.data.tips[Math.floor(Math.random() * that.data.tips.length)]
     });
-    that.textTimer = setInterval(function(){
+    that.data.textTimer = setInterval(function(){
       that.setData({
         text:that.data.tips[Math.floor(Math.random()*that.data.tips.length)]
       })
-    }, 8000)
+    }, 12000)
 
     this.getSingers()
     this.getPlaylists();
@@ -208,6 +215,14 @@ Page({
               key: "myPlaylist",
               data: myPlaylist
             })
+          }else{
+            if (res.data.msg =="登录已过期"){
+              wx.removeStorage({
+                key: 'sessionId',
+                success: function(res) {},
+              });
+              common.login()
+            }
           };
 
         }
@@ -247,8 +262,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    let that = this;
-    that.getPlaylists()
+    // let that = this;
+    // that.getPlaylists()
   },
 
   /**

@@ -6,6 +6,7 @@
     <span></span>{{item.name}}
   </view>
   <view class="card" style="background-color:#e16c96" bindtap="createList"><span></span>创建标签</view>
+  <view class="card" style="background-color:#2b73af" bindtap="gotoNetease"><span></span>随机播放</view>
 
 
   <view class="card" wx:for="{{audio}}" bindtap="goto" wx:key="index" data-tag="{{item.srcTag}}">
