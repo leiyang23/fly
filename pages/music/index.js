@@ -95,7 +95,7 @@ Page({
   delPlaylist(playlistId) {
     let that = this;
     if (app.globalData.sessionId) {
-      let sessionId = app.globalData.sessionId
+      var sessionId = app.globalData.sessionId
     } else {
       wx.showToast({
         title: '未登录',

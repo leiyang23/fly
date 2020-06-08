@@ -1,5 +1,5 @@
 <!--pages/music/netease/index.wxml-->
 
-<view class="con">
-<view class="btn" bindtap="randomPlay" bindlongpress="pause_or_continue">{{text}}</view>
+<view class="con" bindlongpress="pause_or_continue">
+<view class="btn" bindtap="randomPlay" ><span></span>{{text}}</view>
 </view>

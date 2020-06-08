@@ -17,6 +17,11 @@ Page({
       url: setting.basePath + '/netease/random',
       success(res){
         console.log(res)
+        if(res.data == ""){
+          // 在歌单中是收费歌曲时，后台返回空，直接跳过就行了
+          that.randomPlay()
+          return
+        }
         that.audioCtx.title = "随机",
         that.audioCtx.src = res.data;
         that.audioCtx.play();
